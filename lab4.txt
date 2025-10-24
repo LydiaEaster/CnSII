@@ -1,0 +1,27 @@
+% n = 0:10;
+% x = sin(0.5*pi*n);
+% stem(n, x, 'filled')
+% xlabel('n')
+% ylabel('x[n]')
+% title('Discrete-Time Sine Wave')
+% grid on
+
+% 1. Plot the line spectrum of x.t / using the Matlab stem plotting feature.
+% 2. Plot the input and output waveforms x.t / and y.t/.
+% 3. Determine and plot the DC component of the output.
+% 4. Determine and plot the AC (ripple) component of the output.
+% 5. Determine and output the peak-to-peak value of the output ripple.
+% 6. Determine and output the ratio of peak-to-peak ripple to DC at the output
+
+% wfm: h for half wave, f for full wave
+function [wfm, N, f0, Vrms] = main(wfm, N, f0, Vrms);
+  T0 = 1; % 1/s
+  A = 1;  % V
+
+  k = [-N:1:N];         % index vector
+  t = [-T0:.0001:T0];     % time vector
+
+  if (wfm)
+end
+
+main(wfm, N, f0, Vrms);
