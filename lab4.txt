@@ -35,9 +35,25 @@ function [N, f0, Vrms, t, A] = halfwave(N, f0, Vrms, t, A);
 end
 
 function [N, f0, Vrms] = fullwave(N, f0, Vrms);
-  k = 1;
+
+T0 = 1;
+A = 1;
+
+Xk = (2*A)/(pi*(1-4*k^2));
+wk=(2*pi/T0)*k;
+t=-T0:.0001:T0;
+
+for k = -N:N
+
+    summation = Xk*exp(1i*wk*t);
+
+    xt = xt + summation;
+
 end
 
+
+
+end
 % wfm: h for half wave, f for full wave
 function [wfm, N, f0, Vrms] = main(wfm, N, f0, Vrms);
   A = sqrt(2) * Vrms;  % V
