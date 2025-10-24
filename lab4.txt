@@ -13,30 +13,49 @@
 % 5. Determine and output the peak-to-peak value of the output ripple.
 % 6. Determine and output the ratio of peak-to-peak ripple to DC at the output
 
-function [N, f0, Vrms] = halfwave(N, f0, Vrms);
+function [N, f0, Vrms, t, A] = halfwave(N, f0, Vrms, t, A);
+  
+  % summation is a for loop
+  T0 = 1/f0;
+  k = -N;
+  summation = 0;
+  wk=(2*pi/T0)*k;
 
+  for k= -N:N
+      switch k;
+          case mod(k,2)==0
+              Xk = A / (pi * (1 - k^2)); % Fourier coefficients for half-wave rectification
+          case {-1,1}
+              Xk = -i/4*k*A;
+          otherwise
+              Xk = 0;
+      end
+      summation = summation + Xk * exp(i * wk * t);
+  end
 end
 
 function [N, f0, Vrms] = fullwave(N, f0, Vrms);
-
+  k = 1;
 end
 
 % wfm: h for half wave, f for full wave
 function [wfm, N, f0, Vrms] = main(wfm, N, f0, Vrms);
-  T0 = 1; % 1/s
-  A = 1;  % V
+  A = sqrt(2) * Vrms;  % V
+  T0 = 1/f0;
 
   k = [-N:1:N];         % index vector
   t = [-T0:.0001:T0];     % time vector
 
   if (wfm == 'h')
-      halfwave(N, f0, Vrms)
+      halfwave(N, f0, Vrms, t, A);
   elseif (wfm == 'f')
       fullwave(N, f0, Vrms);
   else
       fprintf('You done messed up');
+  end
 
 end
 
-main(wfm, N, f0, Vrms);
+
+main('h', 10, 20, 20);
 
