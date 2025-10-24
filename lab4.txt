@@ -1,4 +1,7 @@
 % n = 0:10;
+
+mksdjosdjojo
+
 % x = sin(0.5*pi*n);
 % stem(n, x, 'filled')
 % xlabel('n')
